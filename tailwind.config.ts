@@ -70,6 +70,12 @@ module.exports = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+      fontFamily: { 
+        "WorkSans" : ["Work Sans", "sans-serif"],
+        "SpaceGrotesk" : ["Space Grotesk", "sans-serif"],
+        "Inter" : ["Inter", "sans-serif"],
+        "DidactGothic" : ["Didact Gothic", "sans-serif"]
+      }
     },
   },
   plugins: [require("tailwindcss-animate")],
