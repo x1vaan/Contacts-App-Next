@@ -79,7 +79,7 @@ export default function LoginForm() {
           <p className="text-base font-medium tracking-tight text-slate-600 text-center">
             If you do not have an account,{" "}
             <Link href="/register" className="text-purple-600">
-              Register
+              Register.
             </Link>
           </p>
         </div>
