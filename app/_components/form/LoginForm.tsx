@@ -4,6 +4,7 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import Link from "next/link";
 import * as z from "zod";
 
 const formSchema = z.object({
@@ -30,23 +31,58 @@ export default function LoginForm() {
   return (
     <Form {...form}>
       <div className="w-[95%] h-full mt-2 flex flex-col justify-start items-center relative">
-        <form onSubmit={() => console.log("Submited")} className="w-full flex flex-col items-center">
+        <form onSubmit={() => console.log("Submited")} className="w-full flex flex-col items-center gap-2">
           <FormField
             control={form.control}
             name="username"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel>Username</FormLabel>
+                <FormLabel>Username:</FormLabel>
                 <FormControl>
-                  <Input type="text" placeholder="Username" {...field} className="focus-visible:ring-transparent"/>
+                  <Input type="text" placeholder="Username" {...field} />
                 </FormControl>
-                <FormDescription>This is your public display name.</FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem className="w-full">
+                <FormLabel>Email:</FormLabel>
+                <FormControl>
+                  <Input type="email" placeholder="Email" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormItem className="w-full">
+                <FormLabel>Password:</FormLabel>
+                <FormControl>
+                  <Input type="password" placeholder="Password" {...field} />
+                </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
         </form>
-        <Button className="bg-purple-600 hover:bg-purple-500 w-[70%] absolute bottom-6">Login</Button>
+        <div className="flex flex-col w-full justify-center items-center absolute bottom-6 gap-4">
+          <Link href='/home' className="w-[70%]">
+            <Button className="bg-purple-600 w-full transition ease-in delay-100 hover:bg-purple-500 hover:scale-95">Login</Button>
+          </Link>
+          <p className="text-base font-medium tracking-tight text-slate-600 text-center">
+            If you do not have an account,{" "}
+            <Link href="/register" className="text-purple-600">
+              Register
+            </Link>
+          </p>
+        </div>
       </div>
     </Form>
   );
