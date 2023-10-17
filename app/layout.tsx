@@ -9,14 +9,15 @@ export const metadata: Metadata = {
 };
 
 const font = Nunito({
-  subsets : ["latin"]
-})
+  subsets: ["latin"],
+});
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={`absolute bg-white w-full h-full ${font.className}`} >
+      <body className={`absolute bg-[#1D2127] w-full h-full ${font.className}`}>
         <Toaster position="bottom-left" expand={true} richColors />
-        <div className="flex w-full h-full">{children}</div>
+        <div className="flex justify-center items-center w-full h-full">{children}</div>
       </body>
     </html>
   );
