@@ -27,7 +27,7 @@ export default function SideBar() {
               <Link
                 href={link.href}
                 key={link.label}
-                className={`w-full h-10 rounded-md flex justify-start items-center gap-5 p-4 py-6 text-base font-medium focus:opacity-60 transition-colors ${
+                className={`w-full h-10 rounded-md flex justify-start items-center gap-5 p-4 py-6 text-base font-medium transition-colors ${
                   pathname.includes(link.href) ? "bg-gradient-to-tl from-blue-600 to-sky-400" : "hover:bg-blue-400"
                 }`}
               >

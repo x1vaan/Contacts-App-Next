@@ -9,7 +9,7 @@ export interface SidebarLinksInterface {
 export interface JsonPlaceholder {
   number: number;
   photo: string;
-  bio: string;
   name: string;
+  email: string;
   id: number;
 }
