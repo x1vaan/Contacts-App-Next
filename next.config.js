@@ -4,7 +4,7 @@ const nextConfig = {
     serverActions: true,
   },
   images: {
-    domains: ["picsum.photos"],
+    domains: ["cloudflare-ipfs.com"],
   },
 };
 

@@ -12,7 +12,7 @@ export default function SideBar() {
     <section className="w-72 bg-inherit h-full shadow-md shadow-current relative flex justify-center items-center left-0 top-0">
       <div className="w-[90%] h-full flex flex-col items-center text-gray-200">
         <div className="w-full flex justify-start items-center mt-8 gap-4 pb-4 border-b-gray-200 border-b-[1px]">
-          <Avatar className="ml-2 w-12 h-12">
+          <Avatar className="ml-2 w-12 h-12 cursor-pointer">
             <AvatarFallback className="bg-gray-300 text-gray-600">IG</AvatarFallback>
           </Avatar>
           <div className="h-full flex items-end">
@@ -27,11 +27,11 @@ export default function SideBar() {
               <Link
                 href={link.href}
                 key={link.label}
-                className={`w-full h-10 rounded-md flex justify-start items-center gap-5 p-4 py-6 text-base font-medium focus:bg-violet-400 transition-colors ${
-                  pathname.includes(link.href) ? "bg-gradient-to-tl from-violet-400 to-violet-100 text-violet-600" : "hover:bg-violet-400 hover:bg-opacity-30"
+                className={`w-full h-10 rounded-md flex justify-start items-center gap-5 p-4 py-6 text-base font-medium focus:opacity-60 transition-colors ${
+                  pathname.includes(link.href) ? "bg-gradient-to-tl from-blue-600 to-sky-400" : "hover:bg-blue-400"
                 }`}
               >
-                <Icon className={`${pathname.includes(link.href) ? "text-violet-600" : ""}`} size={20} />
+                <Icon size={20} />
                 {link.label}
               </Link>
             );

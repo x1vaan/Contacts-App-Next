@@ -7,14 +7,9 @@ export interface SidebarLinksInterface {
 }
 
 export interface JsonPlaceholder {
-  userId: number;
+  number: number;
+  photo: string;
+  bio: string;
+  name: string;
   id: number;
-  title: string;
-  body: string;
-}
-
-export interface ContactsProps {
-  id: number;
-  title: string;
-  body: string;
 }
