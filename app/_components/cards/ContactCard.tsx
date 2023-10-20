@@ -9,7 +9,7 @@ export default function ContactCard({ id, number, photo, name, email }: JsonPlac
     <Card className="rounded-xl transition border-0 bg-[#252930] text-gray-200 relative">
       <CardHeader className="flex justify-center items-center w-full cursor-pointer">
         <div className="relative w-32 h-32">
-          <Image src={photo} fill className="rounded-xl object-cover" alt="Contact" />
+          <Image src={photo} fill className="rounded-xl object-cover" alt="Contact" sizes="100%"/>
         </div>
         <p className="font-bold text-medium text-center text-blue-500">{name}</p>
         <p>{number}</p>
