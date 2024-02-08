@@ -13,3 +13,45 @@ export interface JsonPlaceholder {
   email: string;
   id: number;
 }
+
+export interface UserRegister {
+  name: string;
+  username: string;
+  email: string;
+  password: string;
+  profile_photo: string;
+  id: number;
+  created_at: number;
+}
+
+export interface bodyUserRegister {
+  name: string;
+  username: string;
+  email: string;
+  password: string;
+}
+
+export interface errorResponse {
+  statusCode: number;
+  message: string;
+  error: string;
+}
+
+export interface bodyLoginUser {
+  email: string;
+  password: string;
+}
+
+export interface loginUser {
+  user: string;
+  token: string;
+}
+
+export interface contacts {
+  id: number;
+  name: string;
+  number: number;
+  email: string;
+  profile_photo: string;
+  created_at?: string;
+}

@@ -1,11 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
 import ContactCard from "@/app/_components/cards/ContactCard";
-import { getJson } from "@/app/_actions/ContactsActions";
+import { getContacts, getJson } from "@/app/_actions/ContactsActions";
 import SearchBar from "@/app/_components/SearchBar";
 
 export default async function Home() {
-  const data = await getJson();
+  const data = await getContacts(14);
   return (
     <div className="flex flex-col items-center w-full h-full overflow-y-scroll">
       <SearchBar />
@@ -16,7 +16,7 @@ export default async function Home() {
               id={contact.id}
               email={contact.email}
               number={contact.number}
-              photo={contact.photo}
+              profile_photo={contact.profile_photo}
               name={contact.name}
             />
           );
