@@ -47,7 +47,7 @@ export interface loginUser {
   token: string;
 }
 
-export interface contacts {
+export interface Contacts {
   id: number;
   name: string;
   number: number;

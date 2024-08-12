@@ -1,6 +1,6 @@
 "use server";
 
-import { JsonPlaceholder, UserRegister, bodyLoginUser, bodyUserRegister, contacts, errorResponse, loginUser } from "@/types/types";
+import { JsonPlaceholder, UserRegister, bodyLoginUser, bodyUserRegister, Contacts, errorResponse, loginUser } from "@/types/types";
 
 export async function getJson(): Promise<JsonPlaceholder[] | null> {
   try {
@@ -43,14 +43,14 @@ export async function login(body: bodyLoginUser): Promise<loginUser> {
   }
 }
 
-export async function getContacts(id: number): Promise<contacts[]> {
+export async function getContacts(id: number): Promise<Contacts[]> {
   try {
     const res = await fetch(`${process.env.BACKEND_URL}/users/${id}/contacts`, {
       credentials: "include",
       cache: "no-store",
       method: "GET",
     });
-    const data = await res.json();
+    const data : Contacts[] = await res.json();
     return data;
   } catch (error : any) {
     throw new Error(error.message);

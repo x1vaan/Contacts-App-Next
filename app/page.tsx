@@ -75,7 +75,7 @@ export default function Home() {
           href="/login"
           className="flex justify-center item-center w-[30%] absolute"
         >
-          <Button className="bg-neutral-800 hover:text-customviolet">
+          <Button className="bg-neutral-800 hover:text-greenSpotify">
             Start now <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
         </Link>

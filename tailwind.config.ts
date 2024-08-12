@@ -17,7 +17,11 @@ module.exports = {
     },
     extend: {
       colors: {
-        customviolet: "#4e3b98",
+        customViolet: "#4e3b98",
+        textGray: "#b3b3b3",
+        selectedColor: "#2a2929",
+        greenSpotify: "#65d46e",
+        cardBgColor: "#1f1f1f", 
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

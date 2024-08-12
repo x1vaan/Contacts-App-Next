@@ -9,8 +9,8 @@ import Link from "next/link";
 export default function SideBar() {
   const pathname = usePathname();
   return (
-    <section className="w-72 bg-inherit h-full shadow-md shadow-current relative flex justify-center items-center left-0 top-0">
-      <div className="w-[90%] h-full flex flex-col items-center text-gray-200">
+    <section className="w-72 bg-[#121212] h-full shadow-md shadow-current relative flex justify-center items-center left-0 top-0">
+      <div className="w-[95%] h-full flex flex-col items-center text-textGray p-2">
         <div className="w-full flex justify-start items-center mt-8 gap-4 pb-4 border-b-gray-200 border-b-[1px]">
           <Avatar className="ml-2 w-12 h-12 cursor-pointer">
             <AvatarFallback className="bg-gray-300 text-gray-600">IG</AvatarFallback>
@@ -27,8 +27,8 @@ export default function SideBar() {
               <Link
                 href={link.href}
                 key={link.label}
-                className={`w-full h-10 rounded-md flex justify-start items-center gap-5 p-4 py-6 text-base font-medium transition-colors ${
-                  pathname.includes(link.href) ? "bg-gradient-to-tl from-blue-600 to-sky-400" : "hover:bg-blue-400"
+                className={`w-full h-10 rounded-md flex justify-start items-center gap-5 p-4 py-6 text-base font-medium transition-colors ease-linear duration-200 ${
+                  pathname.includes(link.href) ? "bg-selectedColor text-greenSpotify" : "hover:text-white"
                 }`}
               >
                 <Icon size={20} />
@@ -38,7 +38,7 @@ export default function SideBar() {
           })}
         </div>
         <div className="w-full h-full flex items-end justify-center">
-          <Button className="w-full flex justify-start mb-3 bg-inherit text-gray-200 hover:bg-red-600 text-base font-semibold active:bg-red-500">
+          <Button className="w-full flex justify-start mb-3 bg-inherit text-textGray font-medium transition-colors ease-linear duration-200 hover:text-red-600">
             <LogOut size={20} className="mr-2" /> Log out
           </Button>
         </div>

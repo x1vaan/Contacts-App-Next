@@ -5,7 +5,7 @@ import { getContacts, getJson } from "@/app/_actions/ContactsActions";
 import SearchBar from "@/app/_components/SearchBar";
 
 export default async function Home() {
-  const data = await getContacts(14);
+  const data = await getContacts(1);
   return (
     <div className="flex flex-col items-center w-full h-full overflow-y-scroll">
       <SearchBar />
