@@ -12,10 +12,6 @@ export default function SideBar() {
   const pathname = usePathname();
   const session = useSession();
 
-  if (!session) {
-    redirect("/login");
-  }
-
   return (
     <section className="w-72 bg-[#121212] h-full shadow-md shadow-current relative flex justify-center items-center left-0 top-0">
       <div className="w-[95%] h-full flex flex-col items-center text-textGray p-2">
