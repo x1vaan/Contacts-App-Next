@@ -4,6 +4,7 @@ import { Toaster } from "sonner";
 import { Inter } from "next/font/google";
 // import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Providers from "./_components/Providers";
+import CustomSessionProvider from "./_components/sessionProvider";
 
 export const metadata: Metadata = {
   title: "Contacts App",
@@ -23,9 +24,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Providers>
-          <Toaster position="bottom-left" expand={true} richColors />
-          <div className="absolute top-0 z-[-2] h-screen w-screen bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div>
-          {children}
+          <CustomSessionProvider>
+            <Toaster position="bottom-left" expand={true} richColors />
+            <div className="absolute top-0 z-[-2] h-screen w-screen bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div>
+            {children}
+          </CustomSessionProvider>
         </Providers>
       </body>
     </html>

@@ -3,9 +3,14 @@ import { Loader2 } from "lucide-react";
 import ContactCard from "@/app/_components/cards/ContactCard";
 import { getContacts, getJson } from "@/app/_actions/ContactsActions";
 import SearchBar from "@/app/_components/SearchBar";
+import { getServerSession } from "next-auth";
+import authOptions from "@/authOptions";
 
 export default async function Home() {
-  const data = await getContacts(1);
+  const session = await getServerSession(authOptions);
+  console.log(session);
+  const data = await getContacts(session.user.id);
+  
   return (
     <div className="flex flex-col items-center w-full h-full overflow-y-scroll">
       <SearchBar />
