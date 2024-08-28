@@ -11,7 +11,7 @@ import { signOut } from "next-auth/react";
 export default function SideBar() {
   const pathname = usePathname();
   const session = useSession();
-  console.log(session)
+  
   return (
     <nav className="w-72 bg-black h-full shadow-md shadow-current relative flex justify-center items-center left-0 top-0">
       <div className="w-[95%] h-full flex flex-col items-center text-textGray p-2">

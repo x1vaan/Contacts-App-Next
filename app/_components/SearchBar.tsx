@@ -21,12 +21,12 @@ export default function SearchComponent({ data }: { data: Contacts[] }) {
         <Search className="absolute h-4 w-4 top-3 left-4 text-muted-foreground" />
         <Input
           placeholder="Search contacts..."
-          className="pl-10 bg-[#252930] font-normal border-0 text-white"
+          className="pl-10 bg-searchBarColor font-normal border-0 text-white"
           onChange={(e: any) => setFiltersName(e.target.value)}
           value={filtersName}
         />
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 pb-10 items-center w-[90%] mt-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6 pb-10 items-center w-[90%] mt-8">
         {dataPassed?.map((contact: Contacts) => {
           return (
             <ContactCard
