@@ -8,13 +8,13 @@ export const sidebarLinks: SidebarLinksInterface[] = [
     icon: Home,
   },
   {
-    href: "/create",
-    label: "Create Contact",
-    icon: UserPlus,
-  },
-  {
     href: "/profile",
     label: "Profile",
     icon: UserCircle,
+  },
+  {
+    href: "/create",
+    label: "Create Contact",
+    icon: UserPlus,
   },
 ];

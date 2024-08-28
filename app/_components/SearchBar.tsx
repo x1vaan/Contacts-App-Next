@@ -11,7 +11,7 @@ export default function SearchComponent({ data }: { data: Contacts[] }) {
   const [dataPassed, setDataPassed] = useState<Contacts[]>(data)
 
   useEffect(() => {
-    data = data.filter((contact) => (contact.name.includes(filtersName.toString())));
+    data = data.filter((contact) => (contact.name.toLowerCase().includes(filtersName.toString().toLowerCase())));
     setDataPassed(data)
   }, [filtersName]);
 
@@ -20,7 +20,7 @@ export default function SearchComponent({ data }: { data: Contacts[] }) {
       <div className="relative mt-4">
         <Search className="absolute h-4 w-4 top-3 left-4 text-muted-foreground" />
         <Input
-          placeholder="Search..."
+          placeholder="Search contacts..."
           className="pl-10 bg-[#252930] font-normal border-0 text-white"
           onChange={(e: any) => setFiltersName(e.target.value)}
           value={filtersName}
