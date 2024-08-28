@@ -40,7 +40,7 @@ export default function ContactCard({
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-56 bg-[#282828] border-[#3E3E3E] text-white relative">
             <Link href="/edit">
-              <DropdownMenuItem className="hover:bg-[#3E3E3E] focus:bg-[#3E3E3E] cursor-pointer">
+              <DropdownMenuItem className="hover:bg-[#3E3E3E] focus:bg-[#3E3E3E] hover:text-white cursor-pointer">
                 <Pencil className="mr-2 h-4 w-4" />
                 <span>Edit</span>
               </DropdownMenuItem>
