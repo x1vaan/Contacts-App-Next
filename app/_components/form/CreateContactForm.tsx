@@ -31,6 +31,8 @@ import {
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -42,9 +44,9 @@ const formSchema = z.object({
   phone: z.string().regex(/^\+?[1-9]\d{1,14}$/, {
     message: "Please enter a valid phone number.",
   }),
-//   category: z.string({
-//     required_error: "Please select a category.",
-//   }),
+  //   category: z.string({
+  //     required_error: "Please select a category.",
+  //   }),
   birthday: z.date({
     required_error: "Please select a date.",
   }),
@@ -52,6 +54,7 @@ const formSchema = z.object({
 
 export default function CreateContactForm() {
   const session = useSession();
+  const router = useRouter();
   const [photo, setNewPhoto] = useState<string | null>(null);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -60,7 +63,7 @@ export default function CreateContactForm() {
       name: "",
       email: "",
       phone: "",
-    //   category: "",
+      //   category: "",
       birthday: new Date(),
     },
   });
@@ -77,18 +80,32 @@ export default function CreateContactForm() {
   };
 
   const handleSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
-    // createContact(session.data?.user.token, newContactFixed).then((res) => {
-    //   console.log(res);
-    //   console.log("hola");
-    // });
+    try {
+      createContact(session.data?.user.token, {
+        name: values.name,
+        number: Number(values.phone),
+        email: values.email,
+      })
+      .then((res) => {
+        if (res?.status === 401 || res?.status === 400) {
+          toast.error(
+            "An error ocurred creating the contact, please try again."
+          );
+        } else {
+          toast.success("The contact have been created succesfully.");
+          router.push("/home");
+        }
+      });
+    } catch (error) {
+      toast.error("An error ocurred creating the contact, please try again.");
+    }
   };
 
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(handleSubmit)}
-        className="space-y-8 bg-cardBgColor p-8 rounded-lg"
+        className="space-y-8 bg-cardBgColor p-8 rounded-lg lg:max-w-3xl"
       >
         <div className="flex items-center justify-center mb-6">
           <div className="relative w-40 h-40 border-2 border-dashed border-gray-700 rounded-lg flex items-center justify-center bg-[#282828]">
@@ -112,7 +129,7 @@ export default function CreateContactForm() {
             </div>
           </div>
         </div>
-        <div className="grid grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <FormField
             control={form.control}
             name="name"

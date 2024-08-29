@@ -1,17 +1,17 @@
 "use server";
 
 import {
-  UserRegister,
-  bodyLoginUser,
-  bodyUserRegister,
+  UserRegisterResponse,
+  BodyUserRegister,
   Contacts,
-  errorResponse,
-  loginUser,
-  CreatedContact,
+  LoginUserResponse,
+  CreatedContactResponse,
   PostContact,
 } from "@/types/types";
 
-export async function register(body: bodyUserRegister): Promise<UserRegister> {
+export async function register(
+  body: BodyUserRegister
+): Promise<UserRegisterResponse> {
   try {
     const res = await fetch(`${process.env.BACKEND_URL}/auth/register`, {
       cache: "no-store",
@@ -26,7 +26,10 @@ export async function register(body: bodyUserRegister): Promise<UserRegister> {
   }
 }
 
-export async function login(body: bodyLoginUser): Promise<loginUser> {
+export async function login(body: {
+  email: string;
+  password: string;
+}): Promise<LoginUserResponse> {
   try {
     const res = await fetch(`${process.env.BACKEND_URL}/auth/login`, {
       credentials: "include",
@@ -35,7 +38,7 @@ export async function login(body: bodyLoginUser): Promise<loginUser> {
       body: JSON.stringify(body),
       headers: { "Content-Type": "application/json" },
     });
-    const data: loginUser = await res.json();
+    const data: LoginUserResponse = await res.json();
     return data;
   } catch (error: any) {
     throw new Error(error.message);
@@ -59,7 +62,7 @@ export async function getContacts(id: number): Promise<Contacts[]> {
 export async function createContact(
   token: string,
   body: PostContact
-): Promise<CreatedContact> {
+): Promise<CreatedContactResponse> {
   try {
     const res = await fetch(`${process.env.BACKEND_URL}/contacts`, {
       credentials: "include",
@@ -71,7 +74,25 @@ export async function createContact(
       },
       body: JSON.stringify(body),
     });
-    const data: CreatedContact = await res.json();
+    const data: CreatedContactResponse = await res.json();
+    return data;
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+}
+
+export async function deleteContact(id: number, token: string) {
+  try {
+    const res = await fetch(`${process.env.BACKEND_URL}/contacts/${id}`, {
+      credentials: "include",
+      cache: "no-store",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const data = await res.json();
     return data;
   } catch (error: any) {
     throw new Error(error.message);

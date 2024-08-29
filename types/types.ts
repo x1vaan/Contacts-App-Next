@@ -6,7 +6,7 @@ export interface SidebarLinksInterface {
   icon: LucideIcon;
 }
 
-export interface UserRegister {
+export interface UserRegisterResponse {
   name: string;
   username: string;
   email: string;
@@ -16,25 +16,14 @@ export interface UserRegister {
   created_at: number;
 }
 
-export interface bodyUserRegister {
+export interface BodyUserRegister {
   name: string;
   username: string;
   email: string;
   password: string;
 }
 
-export interface errorResponse {
-  statusCode: number;
-  message: string;
-  error: string;
-}
-
-export interface bodyLoginUser {
-  email: string;
-  password: string;
-}
-
-export interface loginUser {
+export interface LoginUserResponse {
   user: string;
   id: number;
   email: string;
@@ -50,7 +39,7 @@ export interface Contacts {
   created_at?: string;
 }
 
-export interface CreatedContact {
+export interface CreatedContactResponse {
   id: number;
   user: number;
   name: string;
@@ -65,4 +54,8 @@ export interface PostContact {
   number: number;
   email: string;
   profile_photo?: string | null;
+}
+
+export interface DeletedContactResponse {
+  
 }
