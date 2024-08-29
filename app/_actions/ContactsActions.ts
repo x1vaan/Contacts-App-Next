@@ -1,16 +1,15 @@
 "use server";
 
-import { JsonPlaceholder, UserRegister, bodyLoginUser, bodyUserRegister, Contacts, errorResponse, loginUser } from "@/types/types";
-
-export async function getJson(): Promise<JsonPlaceholder[] | null> {
-  try {
-    const res = await fetch("https://653173714d4c2e3f333d0605.mockapi.io/contacts", { cache: "no-store" });
-    const data = await res.json();
-    return data;
-  } catch (error: any) {
-    throw new Error(error.message);
-  }
-}
+import {
+  UserRegister,
+  bodyLoginUser,
+  bodyUserRegister,
+  Contacts,
+  errorResponse,
+  loginUser,
+  CreatedContact,
+  PostContact,
+} from "@/types/types";
 
 export async function register(body: bodyUserRegister): Promise<UserRegister> {
   try {
@@ -36,7 +35,7 @@ export async function login(body: bodyLoginUser): Promise<loginUser> {
       body: JSON.stringify(body),
       headers: { "Content-Type": "application/json" },
     });
-    const data = await res.json();
+    const data: loginUser = await res.json();
     return data;
   } catch (error: any) {
     throw new Error(error.message);
@@ -50,9 +49,31 @@ export async function getContacts(id: number): Promise<Contacts[]> {
       cache: "no-store",
       method: "GET",
     });
-    const data : Contacts[] = await res.json();
+    const data: Contacts[] = await res.json();
     return data;
-  } catch (error : any) {
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+}
+
+export async function createContact(
+  token: string,
+  body: PostContact
+): Promise<CreatedContact> {
+  try {
+    const res = await fetch(`${process.env.BACKEND_URL}/contacts`, {
+      credentials: "include",
+      cache: "no-store",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(body),
+    });
+    const data: CreatedContact = await res.json();
+    return data;
+  } catch (error: any) {
     throw new Error(error.message);
   }
 }

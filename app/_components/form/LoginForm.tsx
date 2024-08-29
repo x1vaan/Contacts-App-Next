@@ -62,7 +62,6 @@ export default function LoginForm() {
         password: values.password,
         redirect: false,
       });
-      console.log(result)
       if (result?.status === 401) {
         toast.error("Login failed, try again.");
         setPending(false)

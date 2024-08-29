@@ -22,7 +22,7 @@ module.exports = {
         selectedColor: "#2a2929",
         greenSpotify: "#65d46e",
         cardBgColor: "#181818",
-        searchBarColor: "#252930",
+        searchBarColor: "#242424",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

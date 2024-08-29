@@ -30,7 +30,7 @@ export default function ContactCard({
             {/* <AvatarImage src={contact.avatarUrl} alt={name} /> */}
             <AvatarFallback>{name.charAt(0).toUpperCase()}</AvatarFallback>
           </Avatar>
-          <h3 className="text-lg font-semibold text-greenSpotify">{name}</h3>
+          <h3 className="text-lg font-semibold text-white">{name}</h3>
         </div>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>

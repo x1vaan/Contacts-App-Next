@@ -6,14 +6,6 @@ export interface SidebarLinksInterface {
   icon: LucideIcon;
 }
 
-export interface JsonPlaceholder {
-  number: number;
-  photo: string;
-  name: string;
-  email: string;
-  id: number;
-}
-
 export interface UserRegister {
   name: string;
   username: string;
@@ -44,6 +36,8 @@ export interface bodyLoginUser {
 
 export interface loginUser {
   user: string;
+  id: number;
+  email: string;
   token: string;
 }
 
@@ -54,4 +48,21 @@ export interface Contacts {
   email: string;
   profile_photo: string;
   created_at?: string;
+}
+
+export interface CreatedContact {
+  id: number;
+  user: number;
+  name: string;
+  number: number;
+  email: string;
+  profile_photo: string | null;
+  created_at?: string;
+}
+
+export interface PostContact {
+  name: string;
+  number: number;
+  email: string;
+  profile_photo?: string | null;
 }

@@ -21,7 +21,7 @@ export default function SearchComponent({ data }: { data: Contacts[] }) {
         <Search className="absolute h-4 w-4 top-3 left-4 text-muted-foreground" />
         <Input
           placeholder="Search contacts..."
-          className="pl-10 bg-searchBarColor font-normal border-0 text-white"
+          className="w-full pl-10 pr-10 py-3 bg-searchBarColor border-none rounded-full focus:ring-2 focus:ring-[#1DB954] focus:outline-none text-white placeholder-gray-400"
           onChange={(e: any) => setFiltersName(e.target.value)}
           value={filtersName}
         />
