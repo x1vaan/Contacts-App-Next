@@ -81,12 +81,12 @@ export default function CreateContactForm() {
 
   const handleSubmit = (values: z.infer<typeof formSchema>) => {
     try {
-      createContact(session.data?.user.token, {
+        console.log(session.data?.user.token)
+        createContact(session.data?.user.token, {
         name: values.name,
         number: Number(values.phone),
         email: values.email,
-      })
-      .then((res) => {
+      }).then((res) => {
         if (res?.status === 401 || res?.status === 400) {
           toast.error(
             "An error ocurred creating the contact, please try again."

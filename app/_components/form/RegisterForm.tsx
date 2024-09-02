@@ -1,6 +1,13 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -8,8 +15,8 @@ import Link from "next/link";
 import * as z from "zod";
 import { register } from "@/app/_actions/ContactsActions";
 import { toast } from "sonner";
-import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 const formSchema = z.object({
   name: z
@@ -29,6 +36,7 @@ const formSchema = z.object({
 
 export default function RegisterForm() {
   const router = useRouter();
+  const session = useSession();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -39,26 +47,31 @@ export default function RegisterForm() {
     },
   });
 
-  const { mutate, isSuccess, isPending } = useMutation({
-    mutationFn: register,
-    onSuccess: (data: any) => {
-      if (data.statusCode === 400) return toast.error(data.message);
-      toast.success("User registered.");
-      router.push("/login");
-    },
-    onError: (data) => {
-      toast.error(data.message);
-    },
-  });
-
   const submitRegister = async (values: z.infer<typeof formSchema>) => {
-    mutate(values);
+    try {
+      console.log(values)
+      register(values).then((res) => {
+        if (res?.status === 401 || res?.status === 400) {
+          toast.error(
+            "An error ocurred creating the User, please try again."
+          );
+        } else {
+          toast.success("The user have been registered succesfully.");
+          router.push("/login");
+        }
+      });
+    } catch (error) {
+      toast.error("An error ocurred creating the User, please try again.");
+    }
   };
 
   return (
     <Form {...form}>
       <div className="w-[95%] h-full mt-2 flex flex-col justify-start items-center relative">
-        <form onSubmit={form.handleSubmit(submitRegister)} className="w-full flex flex-col items-center gap-2">
+        <form
+          onSubmit={form.handleSubmit(submitRegister)}
+          className="w-full flex flex-col items-center gap-2"
+        >
           <FormField
             control={form.control}
             name="name"
@@ -112,7 +125,10 @@ export default function RegisterForm() {
             )}
           />
           <div className="flex flex-col w-full justify-center items-center mb-3 gap-4">
-            <Button className="bg-purple-600 w-full transition ease-in delay-100 hover:bg-purple-500 hover:scale-95" type="submit">
+            <Button
+              className="bg-purple-600 w-full transition ease-in delay-100 hover:bg-purple-500 hover:scale-95"
+              type="submit"
+            >
               Register
             </Button>
             <p className="text-base font-medium tracking-tight text-slate-600 text-center">
