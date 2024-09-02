@@ -1,11 +1,10 @@
-import { Button } from "@/components/ui/button";
-import { Loader2 } from "lucide-react";
-import ContactCard from "@/app/_components/cards/ContactCard";
+// import { Button } from "@/components/ui/button";
+// import { Loader2 } from "lucide-react";
+// import ContactCard from "@/app/_components/cards/ContactCard";
 import { getContacts } from "@/app/_actions/ContactsActions";
 import SearchComponent from "@/app/_components/SearchBar";
 import { getServerSession } from "next-auth";
 import authOptions from "@/authOptions";
-// import FiltersAndOrder from "@/app/_components/FiltersAndOrder";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);

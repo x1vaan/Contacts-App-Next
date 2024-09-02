@@ -19,7 +19,7 @@ export default function SearchComponent({ data }: { data: Contacts[] }) {
   }, [filtersName]);
 
   return (
-    <div className="w-[95%] h-screen flex flex-col justify-center items-center">
+    <div className="w-[95%] h-screen flex flex-col justify-start items-center">
       <div className="relative mt-4 w-full">
         <Search className="absolute h-4 w-4 top-3 left-4 text-muted-foreground" />
         <Input
