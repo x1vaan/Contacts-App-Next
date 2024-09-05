@@ -83,11 +83,11 @@ export default function CreateContactForm() {
 
   const handleSubmit = (values: z.infer<typeof formSchema>) => {
     try {
-      console.log(session.data?.user.token);
       createContact(session.data?.user.token, {
         name: values.name,
         number: Number(values.phone),
         email: values.email,
+        notes: values.notes,
       }).then((res) => {
         if (res?.status === 401 || res?.status === 400) {
           toast.error(

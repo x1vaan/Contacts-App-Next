@@ -1,3 +1,4 @@
+"use client";
 import { Contacts } from "@/types/types";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
@@ -10,6 +11,10 @@ import {
 import { Phone, Mail, MoreHorizontal, Pencil, Trash2 } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
+import { deleteContact } from "@/app/_actions/ContactsActions";
+import { useSession } from "next-auth/react";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 export default function ContactCard({
   id,
@@ -18,6 +23,16 @@ export default function ContactCard({
   name,
   email,
 }: Contacts) {
+  const session = useSession();
+  const router = useRouter()
+
+  const onClickDelete = async (id: number) => {
+    const res = await deleteContact(id, session.data.user.token);
+    if (res.affected == 1) {
+      toast.success("Contact deleted succesfully");
+      router.refresh()
+    }
+  };
   return (
     <div
       key={id}
@@ -45,7 +60,10 @@ export default function ContactCard({
                 <span>Edit</span>
               </DropdownMenuItem>
             </Link>
-            <DropdownMenuItem className="focus:bg-[#3E3E3E] focus:text-[#E22134]">
+            <DropdownMenuItem
+              className="focus:bg-[#3E3E3E] focus:text-[#E22134]"
+              onClick={() => onClickDelete(id)}
+            >
               <Trash2 className="mr-2 h-4 w-4" />
               <span>Delete</span>
             </DropdownMenuItem>

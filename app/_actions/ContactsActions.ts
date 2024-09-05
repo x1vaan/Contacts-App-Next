@@ -93,7 +93,7 @@ export async function deleteContact(id: number, token: string) {
     const res = await fetch(`${process.env.BACKEND_URL}/contacts/${id}`, {
       credentials: "include",
       cache: "no-store",
-      method: "POST",
+      method: "DELETE",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,

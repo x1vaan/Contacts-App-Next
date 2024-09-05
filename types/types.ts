@@ -53,9 +53,8 @@ export interface PostContact {
   name: string;
   number: number;
   email: string;
+  notes: string;
   profile_photo?: string | null;
 }
 
-export interface DeletedContactResponse {
-  
-}
+export interface DeletedContactResponse {}
