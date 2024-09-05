@@ -5,7 +5,7 @@ export default function LoggedLayout({ children }: { children: ReactNode }) {
   return (
     <div className="w-full h-full relative flex">
       <SideBar />
-      <main className="w-full h-full relative">{children}</main>
+      <main className="w-full h-screen relative overflow-y-scroll">{children}</main>
     </div>
   );
 }

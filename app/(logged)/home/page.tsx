@@ -8,7 +8,7 @@ import authOptions from "@/authOptions";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
-  let data = await getContacts(session.user.id);
+  let data = await getContacts(session.user.id, session.user.token);
   return (
     <div className="flex flex-col items-center w-full h-full overflow-y-scroll">
       <SearchComponent data={data}/>

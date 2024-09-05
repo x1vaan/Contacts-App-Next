@@ -9,7 +9,7 @@ import { format } from "date-fns";
 //   SelectValue,
 // } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
-// import { Textarea } from "@/components/ui/textarea";
+import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useSession } from "next-auth/react";
@@ -47,6 +47,7 @@ const formSchema = z.object({
   //   category: z.string({
   //     required_error: "Please select a category.",
   //   }),
+  notes: z.string().max(250, { message: "Notes can't exceed 250 letters." }),
   birthday: z.date({
     required_error: "Please select a date.",
   }),
@@ -64,6 +65,7 @@ export default function CreateContactForm() {
       email: "",
       phone: "",
       //   category: "",
+      notes: "",
       birthday: new Date(),
     },
   });
@@ -81,8 +83,8 @@ export default function CreateContactForm() {
 
   const handleSubmit = (values: z.infer<typeof formSchema>) => {
     try {
-        console.log(session.data?.user.token)
-        createContact(session.data?.user.token, {
+      console.log(session.data?.user.token);
+      createContact(session.data?.user.token, {
         name: values.name,
         number: Number(values.phone),
         email: values.email,
@@ -251,6 +253,22 @@ export default function CreateContactForm() {
             )}
           />
         </div>
+        <FormField
+          control={form.control}
+          name="notes"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="text-white">Notes</FormLabel>
+              <FormControl>
+                <Textarea
+                  placeholder="Add a note to this contact"
+                  className="resize-none bg-[#282828] w-full h-28 text-white border-none focus-visible:ring-0 focus-visible:ring-offset-0"
+                  {...field}
+                />
+              </FormControl>
+            </FormItem>
+          )}
+        />
         <Button
           type="submit"
           className="w-full bg-greenSpotify hover:bg-[#1ED760] text-black font-semibold"

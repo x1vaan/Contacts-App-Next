@@ -45,12 +45,19 @@ export async function login(body: {
   }
 }
 
-export async function getContacts(id: number): Promise<Contacts[]> {
+export async function getContacts(
+  id: number,
+  token: string
+): Promise<Contacts[]> {
   try {
     const res = await fetch(`${process.env.BACKEND_URL}/users/${id}/contacts`, {
       credentials: "include",
       cache: "no-store",
       method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
     });
     const data: Contacts[] = await res.json();
     return data;
