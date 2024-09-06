@@ -66,6 +66,27 @@ export async function getContacts(
   }
 }
 
+export async function getContact(
+  id: number,
+  token: string
+): Promise<Contacts> {
+  try {
+    const res = await fetch(`${process.env.BACKEND_URL}/contacts/${id}`, {
+      credentials: "include",
+      cache: "no-store",
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const data: Contacts = await res.json();
+    return data;
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+}
+
 export async function createContact(
   token: string,
   body: PostContact

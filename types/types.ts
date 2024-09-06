@@ -35,8 +35,10 @@ export interface Contacts {
   name: string;
   number: number;
   email: string;
-  profile_photo: string;
-  created_at?: string;
+  profile_photo?: string;
+  created_at: string;
+  notes: string;
+  birthday_date: string;
 }
 
 export interface CreatedContactResponse {
@@ -55,6 +57,7 @@ export interface PostContact {
   email: string;
   notes: string;
   profile_photo?: string | null;
+  birthday_date: Date;
 }
 
 export interface DeletedContactResponse {}

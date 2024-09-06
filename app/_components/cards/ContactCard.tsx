@@ -24,13 +24,13 @@ export default function ContactCard({
   email,
 }: Contacts) {
   const session = useSession();
-  const router = useRouter()
+  const router = useRouter();
 
   const onClickDelete = async (id: number) => {
     const res = await deleteContact(id, session.data.user.token);
     if (res.affected == 1) {
       toast.success("Contact deleted succesfully");
-      router.refresh()
+      router.refresh();
     }
   };
   return (
@@ -40,13 +40,15 @@ export default function ContactCard({
     >
       {/* TOP PART (AVATAR, NAME, AND OPTIONS) */}
       <div className="flex items-center justify-between mb-3">
-        <div className="flex items-center">
-          <Avatar className="w-12 h-12 mr-3">
-            {/* <AvatarImage src={contact.avatarUrl} alt={name} /> */}
-            <AvatarFallback>{name.charAt(0).toUpperCase()}</AvatarFallback>
-          </Avatar>
-          <h3 className="text-lg font-semibold text-white">{name}</h3>
-        </div>
+        <Link href={`contact/${id}`} className="transparent">
+          <div className="flex items-center">
+            <Avatar className="w-12 h-12 mr-3">
+              {/* <AvatarImage src={contact.avatarUrl} alt={name} /> */}
+              <AvatarFallback>{name.charAt(0).toUpperCase()}</AvatarFallback>
+            </Avatar>
+            <h3 className="text-lg font-semibold text-white">{name}</h3>
+          </div>
+        </Link>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <button className="text-gray-400 hover:text-white">

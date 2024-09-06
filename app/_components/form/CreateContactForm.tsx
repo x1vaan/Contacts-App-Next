@@ -88,6 +88,7 @@ export default function CreateContactForm() {
         number: Number(values.phone),
         email: values.email,
         notes: values.notes,
+        birthday_date : new Date(values.birthday.toISOString())
       }).then((res) => {
         if (res?.status === 401 || res?.status === 400) {
           toast.error(
