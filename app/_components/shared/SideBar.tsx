@@ -11,22 +11,28 @@ import { signOut } from "next-auth/react";
 export default function SideBar() {
   const pathname = usePathname();
   const session = useSession();
-  
+
   return (
     <nav className="w-72 bg-black h-[100vh] shadow-md shadow-current relative flex justify-center items-center left-0 top-0">
       <div className="w-[95%] h-full flex flex-col items-center text-textGray p-2">
         {/* USER INFO */}
         <div className="w-full flex justify-start items-center mt-6 space-x-3 pb-4 border-b border-[#282828]">
-        {/* ALTERNATIVA QUE QUEDA EPICA */}
-        {/* <div className="w-full flex justify-start items-center mt-8 space-x-3 p-4 rounded-md bg-gradient-to-b from-customViolet via-customViolet/80 to-customViolet/50"> */}
-          <Avatar className="w-10 h-10 cursor-pointer">
-            <AvatarFallback className="text-gray-600">
-              {session.data?.user.user.charAt(0)}
-            </AvatarFallback>
-          </Avatar>
+          {/* ALTERNATIVA QUE QUEDA EPICA */}
+          {/* <div className="w-full flex justify-start items-center mt-8 space-x-3 p-4 rounded-md bg-gradient-to-b from-customViolet via-customViolet/80 to-customViolet/50"> */}
+          <Link href="/profile">
+            <Avatar className="w-10 h-10 cursor-pointer">
+              <AvatarFallback className="text-gray-600">
+                {session.data?.user.user.charAt(0)}
+              </AvatarFallback>
+            </Avatar>
+          </Link>
           <div className="h-full flex flex-col items-start justify-center">
-            <p className="font-semibold text-sm text-white">{session.data?.user.user}</p>
-            <p className="text-xs text-[#B3B3B3]">{session.data?.user?.email}</p>
+            <p className="font-semibold text-sm text-white">
+              {session.data?.user.user}
+            </p>
+            <p className="text-xs text-[#B3B3B3]">
+              {session.data?.user?.email}
+            </p>
           </div>
         </div>
         {/* OPTIONS NAVIGATION */}

@@ -1,7 +1,6 @@
 "use client";
 import { Contacts } from "@/types/types";
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
+// import Image from "next/image";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -22,25 +21,42 @@ export default function ContactCard({
   profile_photo,
   name,
   email,
+  birthday_date,
 }: Contacts) {
   const session = useSession();
   const router = useRouter();
 
   const onClickDelete = async (id: number) => {
-    const res = await deleteContact(id, session.data.user.token);
+    const res = await deleteContact(id, session.data?.user?.token);
     if (res.affected == 1) {
       toast.success("Contact deleted succesfully");
-      router.refresh();
+      // location.reload();
+      window.location.reload();
     }
   };
+
+  const isBirthday = () => {
+    if (!birthday_date) return false;
+    const today = new Date();
+    const birthDate = new Date(birthday_date);
+    return (
+      today.getDate() === birthDate.getDate() &&
+      today.getMonth() === birthDate.getMonth()
+    );
+  };
+
+  const cardBackground = isBirthday()
+    ? "bg-gradient-to-br from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600"
+    : "bg-[#181818] hover:bg-[#282828]";
+
   return (
     <div
       key={id}
-      className="bg-[#181818] p-4 rounded-lg hover:bg-[#282828] transition-colors"
+      className={`${cardBackground} p-4 rounded-lg transition-colors relative`}
     >
       {/* TOP PART (AVATAR, NAME, AND OPTIONS) */}
       <div className="flex items-center justify-between mb-3">
-        <Link href={`contact/${id}`} className="transparent">
+        <Link href={`contact/${id}`}>
           <div className="flex items-center">
             <Avatar className="w-12 h-12 mr-3">
               {/* <AvatarImage src={contact.avatarUrl} alt={name} /> */}
@@ -82,6 +98,12 @@ export default function ContactCard({
         <Mail size={16} className="mr-2" />
         {email}
       </div>
+      {isBirthday() && (
+        <div className="absolute bottom-2 right-2 text-xs font-bold">
+          <h4 className="text-base text-white">Birthday</h4>
+        </div>
+      )}
     </div>
   );
 }
+// font-semibold gradient-text text-transparent animate-gradient

@@ -40,6 +40,9 @@ export default function SearchComponent({ data }: { data: Contacts[] }) {
                 profile_photo={contact.profile_photo}
                 name={contact.name}
                 key={contact.id}
+                created_at={contact.created_at}
+                notes={contact.notes}
+                birthday_date={contact.birthday_date}
               />
             );
           })}

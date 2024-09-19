@@ -66,6 +66,21 @@
   }
 }
  
+.gradient-text {
+  background: linear-gradient(
+      to right,
+      #7e22ce,
+      #FAFAFA,
+      #7e22ce,
+      #FAFAFA,
+      #7e22ce,
+      #FAFAFA,
+      #7e22ce
+  );
+  background-clip: text;
+  background-size: 300% 300%;
+}
+
 @layer base {
   * {
     @apply border-border;
