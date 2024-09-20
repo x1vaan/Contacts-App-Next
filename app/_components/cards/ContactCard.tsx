@@ -100,7 +100,7 @@ export default function ContactCard({
       </div>
       {isBirthday() && (
         <div className="absolute bottom-2 right-2 text-xs font-bold">
-          <h4 className="text-base text-white">Birthday</h4>
+          <h4 className="text-sm text-white">Birthday</h4>
         </div>
       )}
     </div>
