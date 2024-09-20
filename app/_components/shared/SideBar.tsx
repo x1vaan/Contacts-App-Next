@@ -22,13 +22,13 @@ export default function SideBar() {
           <Link href="/profile">
             <Avatar className="w-10 h-10 cursor-pointer">
               <AvatarFallback className="text-gray-600">
-                {session.data?.user.user.charAt(0)}
+                {session.data?.user?.name?.charAt(0) || ''}
               </AvatarFallback>
             </Avatar>
           </Link>
           <div className="h-full flex flex-col items-start justify-center">
             <p className="font-semibold text-sm text-white">
-              {session.data?.user.user}
+              {session.data?.user?.user}
             </p>
             <p className="text-xs text-[#B3B3B3]">
               {session.data?.user?.email}

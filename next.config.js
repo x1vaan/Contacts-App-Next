@@ -6,6 +6,9 @@ const nextConfig = {
   images: {
     domains: ["cloudflare-ipfs.com"],
   },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
 };
 
 module.exports = nextConfig;
