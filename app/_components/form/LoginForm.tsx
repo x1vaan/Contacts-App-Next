@@ -47,9 +47,9 @@ export default function LoginForm() {
         redirect: false,
       });
       if (result?.status === 401) {
-        toast.error("Inicio de sesión fallido, intente de nuevo.");
+        toast.error("Login failed, try again.");
       } else {
-        toast.success("Usuario conectado.");
+        toast.success("Logged in successfully.");
         router.push("/home");
       }
     } catch (error: any) {
@@ -80,7 +80,7 @@ export default function LoginForm() {
                     type="email"
                     placeholder="youremail@example.com"
                     {...field}
-                    className="bg-[#282828] border-zinc-700 text-white placeholder:text-zinc-400 focus:border-greenSpotify"
+                    className="bg-inputColor border-zinc-700 text-white placeholder:text-zinc-400 focus:border-greenSpotify"
                   />
                 </FormControl>
                 <FormMessage className="text-red-500" />
@@ -98,7 +98,7 @@ export default function LoginForm() {
                     type="password"
                     placeholder="••••••••"
                     {...field}
-                    className="bg-[#282828] border-zinc-700 text-white placeholder:text-zinc-400 focus:border-greenSpotify"
+                    className="bg-inputColor border-zinc-700 text-white placeholder:text-zinc-400 focus:border-greenSpotify"
                   />
                 </FormControl>
                 <FormMessage className="text-red-500" />

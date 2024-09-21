@@ -30,7 +30,7 @@ export default function SideBar() {
             <p className="font-semibold text-sm text-white">
               {session.data?.user?.user}
             </p>
-            <p className="text-xs text-[#B3B3B3]">
+            <p className="text-xs text-textGray">
               {session.data?.user?.email}
             </p>
           </div>

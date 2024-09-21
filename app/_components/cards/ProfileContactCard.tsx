@@ -37,7 +37,7 @@ export default async function ProfileContactCard({ id }: { id: string }) {
         <Link href="/home" passHref>
           <Button
             variant="link"
-            className="text-[#b3b3b3] hover:text-white mb-6"
+            className="text-textGray hover:text-white mb-6"
           >
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back
@@ -61,7 +61,7 @@ export default async function ProfileContactCard({ id }: { id: string }) {
                   <h1 className="text-3xl font-bold text-white">
                     {contact.name}
                   </h1>
-                  <p className="text-sm text-[#b3b3b3]">Contact</p>
+                  <p className="text-sm text-textGray">Contact</p>
                 </div>
               </div>
               <Button className="bg-greenSpotify hover:bg-[#1ed760] text-black font-semibold py-2 px-4 rounded-full border-none transition-all">
@@ -71,21 +71,21 @@ export default async function ProfileContactCard({ id }: { id: string }) {
             </div>
 
             <div className="space-y-4">
-              <div className="flex items-center text-[#b3b3b3]">
+              <div className="flex items-center text-textGray">
                 <Phone className="mr-3 h-5 w-5" />
                 <span>{contact.number}</span>
               </div>
-              <div className="flex items-center text-[#b3b3b3]">
+              <div className="flex items-center text-textGray">
                 <Mail className="mr-3 h-5 w-5" />
                 <span>{contact.email}</span>
               </div>
-              <div className="flex items-center text-[#b3b3b3]">
+              <div className="flex items-center text-textGray">
                 <Calendar className="mr-3 h-5 w-5" />
                 <span>{formatBirthday(contact.birthday_date)}</span>
               </div>
               <Card className="bg-[#181818] border-none">
                 <CardContent className="p-6">
-                  <span className="text-[#b3b3b3] text-sm mb-2 flex items-center">
+                  <span className="text-textGray text-sm mb-2 flex items-center">
                     <StickyNote className="mr-3 h-5 w-5" />
                     Notes
                   </span>

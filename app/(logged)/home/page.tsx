@@ -11,7 +11,7 @@ export default async function Home() {
   data.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
 
   return (
-    <div className="flex flex-col items-center w-full h-full overflow-y-scroll">
+    <div className="flex flex-col items-center w-full h-full bg-backgroundColor overflow-y-scroll">
       <SearchComponent data={data}/>
     </div>
   );

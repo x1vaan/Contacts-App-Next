@@ -13,7 +13,6 @@ import Link from "next/link";
 import { deleteContact } from "@/app/_actions/ContactsActions";
 import { useSession } from "next-auth/react";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
 
 export default function ContactCard({
   id,
@@ -24,7 +23,6 @@ export default function ContactCard({
   birthday_date,
 }: Contacts) {
   const session = useSession();
-  const router = useRouter();
 
   const onClickDelete = async (id: number) => {
     const res = await deleteContact(id, session.data?.user?.token);
@@ -89,20 +87,33 @@ export default function ContactCard({
         </DropdownMenu>
       </div>
       {/* PHONE PART */}
-      <div className="flex items-center text-sm text-[#B3B3B3] mb-1">
+      <div
+        className={`flex items-center text-sm ${
+          isBirthday() ? "text-gray-200" : "text-textGray"
+        } mb-1`}
+      >
         <Phone size={16} className="mr-2" />
-        {number}
+        {number ? `+${number}` : number}
       </div>
       {/* MAIL PART */}
-      <div className="flex items-center text-sm text-[#B3B3B3]">
-        <Mail size={16} className="mr-2" />
-        {email}
-      </div>
-      {isBirthday() && (
-        <div className="absolute bottom-2 right-2 text-xs font-bold">
-          <h4 className="text-sm text-white">Birthday</h4>
+      <div
+        className={`flex items-center w-full justify-between text-sm ${
+          isBirthday() ? "text-gray-200" : "text-textGray"
+        }`}
+      >
+        <div className="flex items-center">
+          <Mail size={16} className="mr-2" />
+          {email}
         </div>
-      )}
+        {isBirthday() && (
+          <h4 className="text-sm font-semibold text-gray-200">Birthday</h4>
+        )}
+      </div>
+      {/* {isBirthday() && (
+        <div className="absolute bottom-2 right-2 text-xs font-bold">
+          <h4 className="text-sm text-gray-200">Birthday</h4>
+        </div>
+      )} */}
     </div>
   );
 }

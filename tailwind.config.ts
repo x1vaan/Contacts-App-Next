@@ -23,6 +23,8 @@ module.exports = {
         greenSpotify: "#65d46e",
         cardBgColor: "#181818",
         searchBarColor: "#242424",
+        inputColor: "#282828",
+        backgroundColor: "#121212",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

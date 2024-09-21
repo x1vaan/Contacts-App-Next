@@ -33,7 +33,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import Image from 'next/image';
+import Image from "next/image";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -89,7 +89,7 @@ export default function CreateContactForm() {
         number: Number(values.phone),
         email: values.email,
         notes: values.notes,
-        birthday_date : new Date(values.birthday.toISOString())
+        birthday_date: new Date(values.birthday.toISOString()),
       }).then((res) => {
         if (res?.status === 401 || res?.status === 400) {
           toast.error(
@@ -146,7 +146,7 @@ export default function CreateContactForm() {
                   <Input
                     placeholder="Contact name"
                     {...field}
-                    className="bg-[#282828] border-none text-white"
+                    className="bg-inputColor border-none text-white"
                   />
                 </FormControl>
                 <FormMessage />
@@ -163,7 +163,7 @@ export default function CreateContactForm() {
                   <Input
                     placeholder="Email address"
                     {...field}
-                    className="bg-[#282828] border-none text-white"
+                    className="bg-inputColor border-none text-white"
                   />
                 </FormControl>
                 <FormMessage />
@@ -180,7 +180,7 @@ export default function CreateContactForm() {
                   <Input
                     placeholder="Phone number"
                     {...field}
-                    className="bg-[#282828] border-none text-white"
+                    className="bg-inputColor border-none text-white"
                   />
                 </FormControl>
                 <FormMessage />
@@ -266,7 +266,7 @@ export default function CreateContactForm() {
               <FormControl>
                 <Textarea
                   placeholder="Add a note to this contact"
-                  className="resize-none bg-[#282828] w-full h-28 text-white border-none focus-visible:ring-0 focus-visible:ring-offset-0"
+                  className="resize-none bg-inputColor w-full h-28 text-white border-none focus-visible:ring-0 focus-visible:ring-offset-0"
                   {...field}
                 />
               </FormControl>
