@@ -13,25 +13,23 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
 import * as z from "zod";
-// import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-// import { login } from "@/app/_actions/ContactsActions";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
 
 const formSchema = z.object({
-  email: z.string().email({ message: "Email must be a validate email." }),
+  email: z.string().email({ message: "El email debe ser válido." }),
   password: z
     .string()
-    .min(4, { message: "Password must be at least 4 characters." })
-    .max(20, { message: "Password must not be over 20 characters." }),
+    .min(4, { message: "La contraseña debe tener al menos 4 caracteres." })
+    .max(20, { message: "La contraseña no debe tener más de 20 caracteres." }),
 });
 
 export default function LoginForm() {
   const router = useRouter();
-  const [pending, setPending] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -40,59 +38,52 @@ export default function LoginForm() {
     },
   });
 
-  // const { mutate, isSuccess, isPending } = useMutation({
-  //   mutationFn: login,
-  //   onSuccess: (data: any) => {
-  //     if (data.statusCode === 401) return toast.error(data.message);
-  //     toast.success("User registered.");
-  //     router.push("/home");
-  //   },
-  //   onError: (data) => {
-  //     toast.error(data.message);
-  //   },
-  // });
-
   const submitLogin = async (values: z.infer<typeof formSchema>) => {
-    // mutate(values);
-
     try {
-      setPending(true);
+      setIsLoading(true);
       const result = await signIn("credentials", {
         email: values.email,
         password: values.password,
         redirect: false,
       });
       if (result?.status === 401) {
-        toast.error("Login failed, try again.");
-        setPending(false)
+        toast.error("Inicio de sesión fallido, intente de nuevo.");
       } else {
-        toast.success("User logged.");
-        router.push('/home')
+        toast.success("Usuario conectado.");
+        router.push("/home");
       }
-      
     } catch (error: any) {
-      setPending(false);
       toast.error(error.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
-    <Form {...form}>
-      <div className="w-[95%] h-full mt-2 flex flex-col justify-start items-center relative">
-        <form
-          onSubmit={form.handleSubmit(submitLogin)}
-          className="w-full flex flex-col items-center gap-2"
-        >
+    <div className="relative h-full w-full sm:h-auto sm:max-w-md p-8 space-y-6 bg-[#121212] rounded-lg shadow-xl">
+      <div className="space-y-2 text-center">
+        <h1 className="text-3xl font-bold tracking-tighter text-white">
+          Login
+        </h1>
+        <p className="text-sm text-zinc-400">Login to continue</p>
+      </div>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(submitLogin)} className="space-y-4">
           <FormField
             control={form.control}
             name="email"
             render={({ field }) => (
-              <FormItem className="w-full">
-                <FormLabel>Email:</FormLabel>
+              <FormItem>
+                <FormLabel className="text-zinc-300">Email</FormLabel>
                 <FormControl>
-                  <Input type="email" placeholder="Email" {...field} />
+                  <Input
+                    type="email"
+                    placeholder="youremail@example.com"
+                    {...field}
+                    className="bg-[#282828] border-zinc-700 text-white placeholder:text-zinc-400 focus:border-greenSpotify"
+                  />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="text-red-500" />
               </FormItem>
             )}
           />
@@ -100,33 +91,36 @@ export default function LoginForm() {
             control={form.control}
             name="password"
             render={({ field }) => (
-              <FormItem className="w-full mb-3">
-                <FormLabel>Password:</FormLabel>
+              <FormItem>
+                <FormLabel className="text-zinc-300">Password</FormLabel>
                 <FormControl>
-                  <Input type="password" placeholder="Password" {...field} />
+                  <Input
+                    type="password"
+                    placeholder="••••••••"
+                    {...field}
+                    className="bg-[#282828] border-zinc-700 text-white placeholder:text-zinc-400 focus:border-greenSpotify"
+                  />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="text-red-500" />
               </FormItem>
             )}
           />
-          <div className="flex flex-col w-full justify-center items-center mb-3 gap-4">
-            <Button
-              className="bg-purple-600 w-[200px] transition ease-in delay-100 hover:bg-purple-500 hover:scale-95"
-              type="submit"
-              disabled={pending}
-            >
-              {pending ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : ""}
-              Login
-            </Button>
-            <p className="text-base font-medium tracking-tight text-slate-600 text-center">
-              If you do not have an account,{" "}
-              <Link href="/register" className="text-purple-600">
-                Register.
-              </Link>
-            </p>
-          </div>
+          <Button
+            type="submit"
+            disabled={isLoading}
+            className="w-full bg-greenSpotify text-black hover:bg-[#1ED760] focus:ring-2 focus:ring-[#1DB954] focus:ring-offset-2 focus:ring-offset-[#121212]"
+          >
+            {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : ""}
+            {isLoading ? "Loading..." : "Login"}
+          </Button>
         </form>
-      </div>
-    </Form>
+      </Form>
+      <p className="text-sm text-zinc-400 text-center">
+        Don't have an account?{" "}
+        <Link href="/register" className="text-greenSpotify hover:underline">
+          Register.
+        </Link>
+      </p>
+    </div>
   );
 }

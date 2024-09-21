@@ -16,7 +16,8 @@ import * as z from "zod";
 import { register } from "@/app/_actions/ContactsActions";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
+import { useState } from "react";
+import { Loader2 } from "lucide-react";
 
 const formSchema = z.object({
   name: z
@@ -36,7 +37,7 @@ const formSchema = z.object({
 
 export default function RegisterForm() {
   const router = useRouter();
-  const session = useSession();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -49,12 +50,10 @@ export default function RegisterForm() {
 
   const submitRegister = async (values: z.infer<typeof formSchema>) => {
     try {
-      console.log(values)
+      console.log(values);
       register(values).then((res) => {
         if (res?.status === 401 || res?.status === 400) {
-          toast.error(
-            "An error ocurred creating the User, please try again."
-          );
+          toast.error("An error ocurred creating the User, please try again.");
         } else {
           toast.success("The user have been registered succesfully.");
           router.push("/login");
@@ -66,22 +65,32 @@ export default function RegisterForm() {
   };
 
   return (
-    <Form {...form}>
-      <div className="w-[95%] h-full mt-2 flex flex-col justify-start items-center relative">
+    <div className="relative h-full w-full sm:h-auto sm:max-w-md p-8 space-y-6 bg-[#121212] rounded-lg shadow-xl">
+      <div className="space-y-2 text-center">
+        <h1 className="text-3xl font-bold tracking-tighter text-white">
+          Register
+        </h1>
+        <p className="text-sm text-zinc-400">Register to continue</p>
+      </div>
+      <Form {...form}>
         <form
           onSubmit={form.handleSubmit(submitRegister)}
-          className="w-full flex flex-col items-center gap-2"
+          className="space-y-4"
         >
           <FormField
             control={form.control}
             name="name"
             render={({ field }) => (
-              <FormItem className="w-full">
-                <FormLabel>Name:</FormLabel>
+              <FormItem>
+                <FormLabel className="text-zinc-300">Name</FormLabel>
                 <FormControl>
-                  <Input type="text" placeholder="Name" {...field} />
+                  <Input
+                    placeholder="Your name"
+                    {...field}
+                    className="bg-[#282828] border-zinc-700 text-white placeholder:text-zinc-400 focus:border-greenSpotify"
+                  />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="text-red-500" />
               </FormItem>
             )}
           />
@@ -89,12 +98,16 @@ export default function RegisterForm() {
             control={form.control}
             name="username"
             render={({ field }) => (
-              <FormItem className="w-full">
-                <FormLabel>Username:</FormLabel>
+              <FormItem>
+                <FormLabel className="text-zinc-300">Username</FormLabel>
                 <FormControl>
-                  <Input type="text" placeholder="Username" {...field} />
+                  <Input
+                    placeholder="Your username"
+                    {...field}
+                    className="bg-[#282828] border-zinc-700 text-white placeholder:text-zinc-400 focus:border-greenSpotify"
+                  />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="text-red-500" />
               </FormItem>
             )}
           />
@@ -102,12 +115,16 @@ export default function RegisterForm() {
             control={form.control}
             name="email"
             render={({ field }) => (
-              <FormItem className="w-full">
-                <FormLabel>Email:</FormLabel>
+              <FormItem>
+                <FormLabel className="text-zinc-300">Email</FormLabel>
                 <FormControl>
-                  <Input type="email" placeholder="Email" {...field} />
+                  <Input
+                    placeholder="you@example.com"
+                    {...field}
+                    className="bg-[#282828] border-zinc-700 text-white placeholder:text-zinc-400 focus:border-greenSpotify"
+                  />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="text-red-500" />
               </FormItem>
             )}
           />
@@ -115,31 +132,53 @@ export default function RegisterForm() {
             control={form.control}
             name="password"
             render={({ field }) => (
-              <FormItem className="w-full mb-3">
-                <FormLabel>Password:</FormLabel>
+              <FormItem>
+                <FormLabel className="text-zinc-300">Password</FormLabel>
                 <FormControl>
-                  <Input type="password" placeholder="Password" {...field} />
+                  <Input
+                    type="password"
+                    placeholder="••••••••"
+                    {...field}
+                    className="bg-[#282828] border-zinc-700 text-white placeholder:text-zinc-400 focus:border-greenSpotify"
+                  />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="text-red-500" />
               </FormItem>
             )}
           />
-          <div className="flex flex-col w-full justify-center items-center mb-3 gap-4">
-            <Button
-              className="bg-purple-600 w-full transition ease-in delay-100 hover:bg-purple-500 hover:scale-95"
-              type="submit"
-            >
-              Register
-            </Button>
-            <p className="text-base font-medium tracking-tight text-slate-600 text-center">
-              Do you already have an account?{" "}
-              <Link href="/login" className="text-purple-600">
-                Log in.
-              </Link>
-            </p>
-          </div>
+          {/* <FormField
+            control={form.control}
+            name="terms"
+            render={({ field }) => (
+              <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+                <FormControl>
+                  <Checkbox
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                    className="border-zinc-700 data-[state=checked]:bg-[#1DB954] data-[state=checked]:border-[#1DB954]"
+                  />
+                </FormControl>
+                <div className="space-y-1 leading-none">
+                  <FormLabel className="text-sm font-medium text-zinc-300">
+                    Accept terms and conditions
+                  </FormLabel>
+                  <FormDescription className="text-xs text-zinc-400">
+                    You agree to our Terms of Service and Privacy Policy.
+                  </FormDescription>
+                </div>
+              </FormItem>
+            )}
+          /> */}
+          <Button
+            type="submit"
+            disabled={isLoading}
+            className="w-full bg-greenSpotify text-black hover:bg-[#1ED760] focus:ring-2 focus:ring-[#1DB954] focus:ring-offset-2 focus:ring-offset-[#121212]"
+          >
+            {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : ""}
+            {isLoading ? "Creating account..." : "Create account"}
+          </Button>
         </form>
-      </div>
-    </Form>
+      </Form>
+    </div>
   );
 }
