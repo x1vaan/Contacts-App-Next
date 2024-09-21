@@ -60,7 +60,7 @@ export default function LoginForm() {
   };
 
   return (
-    <div className="relative h-full w-full sm:h-auto sm:max-w-md p-8 space-y-6 bg-[#121212] rounded-lg shadow-xl">
+    <div className="relative h-screen w-full sm:h-auto sm:max-w-md p-8 space-y-6 bg-[#121212] rounded-lg shadow-xl">
       <div className="space-y-2 text-center">
         <h1 className="text-3xl font-bold tracking-tighter text-white">
           Login

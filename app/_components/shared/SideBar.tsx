@@ -7,13 +7,28 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
+import { useEffect } from 'react';
 
 export default function SideBar() {
   const pathname = usePathname();
   const session = useSession();
 
+  useEffect(() => {
+    const adjustHeight = () => {
+      const sidebar = document.querySelector('nav');
+      if (sidebar) {
+        sidebar.style.height = `${window.innerHeight}px`;
+      }
+    };
+
+    window.addEventListener('resize', adjustHeight);
+    adjustHeight(); // Ajustar al cargar
+
+    return () => window.removeEventListener('resize', adjustHeight);
+  }, []);
+
   return (
-    <nav className="w-72 bg-black h-[100vh] shadow-md shadow-current relative flex justify-center items-center left-0 top-0">
+    <nav className="w-72 bg-black h-screen shadow-md shadow-current relative flex justify-center items-center left-0 top-0">
       <div className="w-[95%] h-full flex flex-col items-center text-textGray p-2">
         {/* USER INFO */}
         <div className="w-full flex justify-start items-center mt-6 space-x-3 pb-4 border-b border-[#282828]">
