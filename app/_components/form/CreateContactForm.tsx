@@ -33,6 +33,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import Image from 'next/image';
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -113,9 +114,11 @@ export default function CreateContactForm() {
         <div className="flex items-center justify-center mb-6">
           <div className="relative w-40 h-40 border-2 border-dashed border-gray-700 rounded-lg flex items-center justify-center bg-[#282828]">
             {photo ? (
-              <img
+              <Image
                 src={photo}
                 alt="Contact"
+                width={500}
+                height={300}
                 className="w-full h-full object-cover rounded-lg"
               />
             ) : (

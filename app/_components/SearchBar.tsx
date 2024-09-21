@@ -4,18 +4,24 @@ import { Input } from "@/components/ui/input";
 import { Contacts } from "@/types/types";
 import { Search } from "lucide-react";
 import ContactCard from "./cards/ContactCard";
-import { useEffect, useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import NoContactsCard from "./cards/NoContactsCard";
 
 export default function SearchComponent({ data }: { data: Contacts[] }) {
   const [filtersName, setFiltersName] = useState<string>("");
   const [dataPassed, setDataPassed] = useState<Contacts[]>(data);
+  const dataRef = useRef<Contacts[]>(data);
 
   useEffect(() => {
-    data = data.filter((contact) =>
-      contact.name.toLowerCase().includes(filtersName.toString().toLowerCase())
-    );
-    setDataPassed(data);
+    const fetchData = () => {
+      const filteredData = data.filter((contact) =>
+        contact.name.toLowerCase().includes(filtersName.toString().toLowerCase())
+      );
+      dataRef.current = filteredData;
+      setDataPassed(filteredData);
+    };
+
+    fetchData();
   }, [filtersName]);
 
   return (
