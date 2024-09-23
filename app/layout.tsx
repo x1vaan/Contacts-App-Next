@@ -1,10 +1,16 @@
 import "./globals.css";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Toaster } from "sonner";
 import { Inter } from "next/font/google";
 // import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 // import Providers from "./_components/Providers";
 import CustomSessionProvider from "./_components/sessionProvider";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+};
 
 export const metadata: Metadata = {
   title: "Contacts App",

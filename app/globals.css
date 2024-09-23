@@ -85,8 +85,8 @@
   * {
     @apply border-border;
   }
- body {
+  body {
     @apply bg-background text-foreground;
-    overflow: hidden;
+    background-color: black;
   }
 }
