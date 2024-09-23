@@ -81,7 +81,7 @@ export default async function ProfileContactCard({ id }: { id: string }) {
               </div>
               <div className="flex items-center text-textGray">
                 <Calendar className="mr-3 h-5 w-5" />
-                <span>{formatBirthday(contact.birthday_date)}</span>
+                <time>{formatBirthday(contact.birthday_date)}</time>
               </div>
               <Card className="bg-[#181818] border-none">
                 <CardContent className="p-6">

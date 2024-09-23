@@ -28,7 +28,7 @@ export default function SideBar() {
   }, []);
 
   return (
-    <nav className="w-72 bg-black h-screen shadow-md shadow-current relative flex justify-center items-center left-0 top-0">
+    <nav className="w-72 bg-black h-screen shadow-md shadow-current overflow-hidden flex justify-center items-center left-0 top-0">
       <div className="w-[95%] h-full flex flex-col items-center text-textGray p-2">
         {/* USER INFO */}
         <div className="w-full flex justify-start items-center mt-6 space-x-3 pb-4 border-b border-[#282828]">
