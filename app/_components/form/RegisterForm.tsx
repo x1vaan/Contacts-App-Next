@@ -87,7 +87,7 @@ export default function RegisterForm() {
                   <Input
                     placeholder="Your name"
                     {...field}
-                    className="bg-inputColor border-zinc-700 text-white placeholder:text-zinc-400 focus:border-greenSpotify"
+                    className="text-base bg-inputColor border-zinc-700 text-white placeholder:text-zinc-400 focus:border-greenSpotify"
                   />
                 </FormControl>
                 <FormMessage className="text-red-500" />
@@ -104,7 +104,7 @@ export default function RegisterForm() {
                   <Input
                     placeholder="Your username"
                     {...field}
-                    className="bg-inputColor border-zinc-700 text-white placeholder:text-zinc-400 focus:border-greenSpotify"
+                    className="text-base bg-inputColor border-zinc-700 text-white placeholder:text-zinc-400 focus:border-greenSpotify"
                   />
                 </FormControl>
                 <FormMessage className="text-red-500" />
@@ -121,7 +121,7 @@ export default function RegisterForm() {
                   <Input
                     placeholder="you@example.com"
                     {...field}
-                    className="bg-inputColor border-zinc-700 text-white placeholder:text-zinc-400 focus:border-greenSpotify"
+                    className="text-base bg-inputColor border-zinc-700 text-white placeholder:text-zinc-400 focus:border-greenSpotify"
                   />
                 </FormControl>
                 <FormMessage className="text-red-500" />
@@ -139,7 +139,7 @@ export default function RegisterForm() {
                     type="password"
                     placeholder="••••••••"
                     {...field}
-                    className="bg-inputColor border-zinc-700 text-white placeholder:text-zinc-400 focus:border-greenSpotify"
+                    className="text-base bg-inputColor border-zinc-700 text-white placeholder:text-zinc-400 focus:border-greenSpotify"
                   />
                 </FormControl>
                 <FormMessage className="text-red-500" />
