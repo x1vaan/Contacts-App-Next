@@ -7,33 +7,33 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function SideBar() {
   const pathname = usePathname();
   const session = useSession();
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   useEffect(() => {
-    const adjustHeight = () => {
+    const adjustSidebar = () => {
       const sidebar = document.querySelector('nav');
       if (sidebar) {
         sidebar.style.height = `${window.innerHeight}px`;
       }
+      setIsCollapsed(window.innerWidth < 700);
     };
 
-    window.addEventListener('resize', adjustHeight);
-    adjustHeight(); // Ajustar al cargar
+    window.addEventListener('resize', adjustSidebar);
+    adjustSidebar(); // Ajustar al cargar
 
-    return () => window.removeEventListener('resize', adjustHeight);
+    return () => window.removeEventListener('resize', adjustSidebar);
   }, []);
 
   return (
-    <nav className="w-72 bg-black h-screen shadow-md shadow-current overflow-hidden flex justify-center items-center left-0 top-0">
-      <div className="w-[95%] h-full flex flex-col items-center text-textGray p-2">
+    <nav className={`bg-black h-screen shadow-md shadow-current relative left-0 top-0 transition-all duration-300 ${isCollapsed ? 'w-16' : 'w-72'}`}>
+      <div className="w-full h-full flex flex-col items-center text-textGray p-2">
         {/* USER INFO */}
-        <div className="w-full flex justify-start items-center mt-6 space-x-3 pb-4 border-b border-[#282828]">
-          {/* ALTERNATIVA QUE QUEDA EPICA */}
-          {/* <div className="w-full flex justify-start items-center mt-8 space-x-3 p-4 rounded-md bg-gradient-to-b from-customViolet via-customViolet/80 to-customViolet/50"> */}
+        <div className={`w-full flex justify-start items-center mt-6 space-x-3 pb-4 border-b border-[#282828] ${isCollapsed ? 'justify-center' : ''}`}>
           <Link href="/profile">
             <Avatar className="w-10 h-10 cursor-pointer">
               <AvatarFallback className="text-gray-600">
@@ -41,14 +41,16 @@ export default function SideBar() {
               </AvatarFallback>
             </Avatar>
           </Link>
-          <div className="h-full flex flex-col items-start justify-center">
-            <p className="font-semibold text-sm text-white">
-              {session.data?.user?.user}
-            </p>
-            <p className="text-xs text-textGray">
-              {session.data?.user?.email}
-            </p>
-          </div>
+          {!isCollapsed && (
+            <div className="h-full flex flex-col items-start justify-center">
+              <p className="font-semibold text-sm text-white">
+                {session.data?.user?.user}
+              </p>
+              <p className="text-xs text-textGray">
+                {session.data?.user?.email}
+              </p>
+            </div>
+          )}
         </div>
         {/* OPTIONS NAVIGATION */}
         <div className="w-full flex flex-col justify-center items-center gap-2 mt-10">
@@ -58,14 +60,14 @@ export default function SideBar() {
               <Link
                 href={link.href}
                 key={link.label}
-                className={`w-full h-10 rounded-md flex justify-start items-center gap-5 p-4 text-base transition-colors ease-linear duration-200 ${
+                className={`w-full h-10 rounded-md flex ${isCollapsed ? 'justify-center' : 'justify-start'} items-center gap-5 p-4 text-base transition-colors ease-linear duration-200 ${
                   pathname.includes(link.href)
                     ? "bg-selectedColor text-greenSpotify"
                     : "hover:text-white"
                 }`}
               >
                 <Icon size={20} />
-                {link.label}
+                {!isCollapsed && link.label}
               </Link>
             );
           })}
@@ -73,10 +75,11 @@ export default function SideBar() {
         {/* LOGOUT BUTTON */}
         <div className="w-full h-full flex items-end justify-center">
           <Button
-            className="w-full flex justify-start mb-3 bg-inherit text-textGray font-medium transition-colors ease-linear duration-200 hover:text-red-600"
+            className={`w-full flex ${isCollapsed ? 'justify-center' : 'justify-start'} mb-3 bg-inherit text-textGray font-medium transition-colors ease-linear duration-200 hover:text-red-600`}
             onClick={() => signOut({ callbackUrl: "/login" })}
           >
-            <LogOut size={20} className="mr-2" /> Log out
+            <LogOut size={20} className={isCollapsed ? '' : 'mr-2'} />
+            {!isCollapsed && 'Log out'}
           </Button>
         </div>
       </div>
