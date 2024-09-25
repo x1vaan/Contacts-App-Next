@@ -20,7 +20,7 @@ export default function SideBar() {
       if (sidebar) {
         sidebar.style.height = `${window.innerHeight}px`;
       }
-      setIsCollapsed(window.innerWidth < 700);
+      setIsCollapsed(window.innerWidth < 768);
     };
 
     window.addEventListener('resize', adjustSidebar);
@@ -30,7 +30,7 @@ export default function SideBar() {
   }, []);
 
   return (
-    <nav className={`bg-black h-screen shadow-md shadow-current relative left-0 top-0 transition-all duration-300 ${isCollapsed ? 'w-16' : 'w-72'}`}>
+    <nav className={`bg-black h-screen shadow-md shadow-current ${isCollapsed ? 'fixed' : 'relative'} left-0 top-0 transition-all duration-300 ${isCollapsed ? 'w-16' : 'w-72'}`}>
       <div className="w-full h-full flex flex-col items-center text-textGray p-2">
         {/* USER INFO */}
         <div className={`w-full flex justify-start items-center mt-6 space-x-3 pb-4 border-b border-[#282828] ${isCollapsed ? 'justify-center' : ''}`}>

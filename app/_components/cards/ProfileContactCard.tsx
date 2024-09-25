@@ -32,8 +32,8 @@ export default async function ProfileContactCard({ id }: { id: string }) {
   };
 
   return (
-    <div className="min-h-screen text-white p-6">
-      <div className="max-w-2xl mx-auto">
+    <div className="min-h-screen bg-backgroundColor text-white flex flex-col">
+      <div className="w-full max-w-2xl mx-auto flex-grow flex flex-col">
         <Link href="/home" passHref>
           <Button
             variant="link"
@@ -44,8 +44,8 @@ export default async function ProfileContactCard({ id }: { id: string }) {
           </Button>
         </Link>
 
-        <Card className="bg-[#181818] border-none">
-          <CardContent className="p-6">
+        <Card className="bg-[#181818] border-none flex-grow md:flex-grow-0">
+          <CardContent className="p-6 h-full flex flex-col">
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center space-x-4">
                 <Avatar className="w-24 h-24">
