@@ -32,7 +32,7 @@ export default async function ProfileContactCard({ id }: { id: string }) {
   };
 
   return (
-    <div className="min-h-screen bg-backgroundColor text-white flex flex-col">
+    <div className="min-h-screen w-full bg-backgroundColor text-white flex flex-col">
       <div className="w-full max-w-2xl mx-auto flex-grow flex flex-col">
         <Link href="/home" passHref>
           <Button
@@ -44,11 +44,11 @@ export default async function ProfileContactCard({ id }: { id: string }) {
           </Button>
         </Link>
 
-        <Card className="bg-[#181818] border-none flex-grow md:flex-grow-0">
-          <CardContent className="p-6 h-full flex flex-col">
+        <Card className="bg-[#181818] border-none flex-grow md:flex-grow-0 w-full">
+          <CardContent className="p-6 h-full flex flex-col mx-auto">
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center space-x-4">
-                <Avatar className="w-24 h-24">
+                <Avatar className="w-16 h-16 sm:w-24 sm:h-24">
                   <AvatarImage
                     src={`/placeholder.svg?text=${contact.name.charAt(0)}`}
                     alt={contact.name}
@@ -58,13 +58,13 @@ export default async function ProfileContactCard({ id }: { id: string }) {
                   </AvatarFallback>
                 </Avatar>
                 <div>
-                  <h1 className="text-3xl font-bold text-white">
+                  <h1 className="text-2xl sm:text-3xl font-bold text-white">
                     {contact.name}
                   </h1>
                   <p className="text-sm text-textGray">Contact</p>
                 </div>
               </div>
-              <Button className="bg-greenSpotify hover:bg-[#1ed760] text-black font-semibold py-2 px-4 rounded-full border-none transition-all">
+              <Button className="bg-greenSpotify hover:bg-[#1ed760] text-black font-semibold py-1 px-3 sm:py-2 sm:px-4 rounded-full border-none transition-all">
                 <Edit className="mr-2 h-4 w-4" />
                 Edit
               </Button>
@@ -84,7 +84,7 @@ export default async function ProfileContactCard({ id }: { id: string }) {
                 <time>{formatBirthday(contact.birthday_date)}</time>
               </div>
               <Card className="bg-[#181818] border-none">
-                <CardContent className="p-6">
+                <CardContent className="py-6 px-0 sm:p-6">
                   <span className="text-textGray text-sm mb-2 flex items-center">
                     <StickyNote className="mr-3 h-5 w-5" />
                     Notes
@@ -92,7 +92,7 @@ export default async function ProfileContactCard({ id }: { id: string }) {
                   <Textarea
                     value={contact.notes}
                     disabled
-                    className="w-full bg-[#282828] border-none text-white resize-none"
+                    className="w-full bg-[#282828] min-h-[150px] sm:min-h-0 border-none text-white resize-none"
                     rows={4}
                   />
                 </CardContent>
