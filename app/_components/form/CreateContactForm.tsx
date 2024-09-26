@@ -109,7 +109,7 @@ export default function CreateContactForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(handleSubmit)}
-        className="space-y-8 bg-cardBgColor p-8 rounded-lg lg:max-w-3xl min-h-full"
+        className="space-y-8 bg-cardBgColor p-8 rounded-lg lg:max-w-3xl"
       >
         <div className="flex items-center justify-center mb-6">
           <div className="relative w-40 h-40 border-2 border-dashed border-gray-700 rounded-lg flex items-center justify-center bg-[#282828]">
